@@ -22,7 +22,7 @@ def get_fashionista_path():
     global path
     if path is None:
         with open('/etc/fashionista/config') as f:
-            path = f.read()
+            path = f.read().strip()
     return path
 
 # TODO: Use this in structure and manage db.
@@ -33,12 +33,15 @@ def get_items_dump_path():
     return '%s/fashionistapulp/fashionistapulp/item_db_dumped.dump' % get_fashionista_path()
 
 def load_items_db_from_dump():
-    LOAD_SCRIPT_PATH = '%s/load_item_db.py' % get_fashionista_path()
-    os.system(LOAD_SCRIPT_PATH)
+    run_root_script('load_item_db.py')
 
 def save_items_db_to_dump():
-    DUMP_SCRIPT_PATH = '%s/dump_item_db.py' % get_fashionista_path()
-    os.system(DUMP_SCRIPT_PATH)
+    run_root_script('dump_item_db.py')
+
+def run_root_script(script_path):
+    ENV_VAR = 'PYTHONPATH=%s/fashionistapulp' % (get_fashionista_path())
+    LOAD_SCRIPT_PATH = '%s/%s' % (get_fashionista_path(), script_path)
+    os.system('%s %s' % (ENV_VAR, LOAD_SCRIPT_PATH))
 
 serve_static = None
 

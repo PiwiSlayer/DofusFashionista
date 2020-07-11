@@ -73,7 +73,7 @@ GEN_CONFIG_FILE = {
     'char_id_SECRET_PART_1': 'my_secret',
     'char_id_SECRET_PART_2': 'my_other_secret',
     'google_analytics_id': None,
-    'TESTER_USERS_EMAILS': [],
+    'TESTER_USERS_EMAILS': ["my_email@here.com"],
     'SUPER_USERS_EMAILS': [],
     "EMAIL_USE_TLS": True,
     "EMAIL_HOST": "smtp@host.com",
