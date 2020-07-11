@@ -1,0 +1,4 @@
+To run the crawler:
+scrapy crawl venom -o items.json
+
+
