@@ -6,7 +6,7 @@ The Dofus Fashionista, an equipment advisor for Dofus
 sudo apt-get update  
 Install Git - sudo apt-get install git  
 git clone https://github.com/PiwiSlayer/DofusFashionista.git fashionista  
-Add “export PYTHONPATH=/home/<<user>>/fashionista/fashionistapulp” at the end of ~/.bashrc  
+Add “export PYTHONPATH=/home/<\<user\>>/fashionista/fashionistapulp” at the end of ~/.bashrc  
 chmod 777 fashionista  
 chmod 777 fashionista/fashionistapulp/fashionistapulp  
 cd fashionista  
