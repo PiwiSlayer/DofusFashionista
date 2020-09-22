@@ -328,7 +328,9 @@ def _convert_json_item_to_item(json_item):
             set_reference = item_set.split(' ', 2)
             item.set = safe_int(set_reference[1])
         else:
-            item.set = structure.get_set_id_by_name(item_set)
+            set_reference = item_set.split(' ', 2)
+            item.set = safe_int(set_reference[0])
+            print item.set
     
     item.weird_conditions = json_item['weird_conditions']
     

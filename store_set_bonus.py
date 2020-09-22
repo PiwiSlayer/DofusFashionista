@@ -103,6 +103,8 @@ def _convert_json_item_to_item(json_set):
                 stat_name = stat_name.replace('Power (traps)', '% Trap Damage')
                 stat_name = stat_name.replace('pods', 'Pods')
                 stat_name = stat_name.replace('Summons', 'Summon')
+                stat_name = stat_name.replace('MP Parry', 'MP Loss Resist')
+                stat_name = stat_name.replace('AP Parry', 'AP Loss Resist')
                 if '%' in stat[0] and not 'Critical' in stat_name and not 'Power' in stat_name:
                     stat_name = '% ' + stat_name
                 stat_obj = structure.get_stat_by_name(stat_name)
@@ -125,4 +127,4 @@ def read_id_to_terms(filename):
     return setses
 
 if __name__ == '__main__':
-    main('itemscraper/dofus1sets.json')
+    main('itemscraper/sets.json')
