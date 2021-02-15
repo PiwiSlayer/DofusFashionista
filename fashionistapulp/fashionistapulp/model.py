@@ -213,13 +213,13 @@ class Model:
                                ebony_dofus_new_stat_weight)
         
         
-        #Adding more weight to Dorigami equivalent to 20 (avg vit weight) + lvl * 5 (turns) * 0.75
+        #Adding more weight to Dorigami equivalent to 20 (avg vit weight) + lvl * 1.25
         #Applies 100% of level as Shield at the start of each turn for the first
         #5 turns. During each of these 5 turns, if the caster kills a summons, the
         #caster gains 100% of their level as Shield for 1 turn (max. 4 times), and
         #300% (max. 2 times) for a monster or player. Shields are only obtained 
         #during the caster's turn.
-        dorigami_dofus_new_stat_weight = 20 * level * 5 * 0.75
+        dorigami_dofus_new_stat_weight = 20 * level * 1.25
         
         self.problem.add_to_of('p', 
                                self.structure.get_item_by_name('Dorigami').id, 
