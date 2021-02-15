@@ -119,15 +119,14 @@ class Model:
                                self.structure.get_item_by_name('Ochre Dofus').id, 
                                ochre_dofus_new_stat_weight)
         
-        #Adding more weight to Emerald Dofus equivalent to 50 HP
-        #at the end of the turn it gives 4% shield points 
-        # for each enemy you are in close combat with.
+        #Adding more weight to Emerald Dofus equivalent to
+        #At the end of the turn, gives 100% of the owner's level in shield points
+        #for each adjacent enemy. Summons are not counted.
         
-        #Formula: expected life at lvl 200: 4500 - get 4% of that. 
-        # Multiply by 0.5, since you get the bonus 50% of the time
+        #Formula: Multiply by 0.5, since you get the bonus 50% of the time
         # Correct for level
         
-        emerald_dofus_new_stat_weight = objective_values.get('hp', 0) * (4500.0 * 4 / 100) * 0.5 * level / 200
+        emerald_dofus_new_stat_weight = objective_values.get('hp', 0) * 0.5 * level
         
         self.problem.add_to_of('p', 
                                self.structure.get_item_by_name('Emerald Dofus').id, 
@@ -213,6 +212,34 @@ class Model:
                                self.structure.get_item_by_name('Ebony Dofus').id, 
                                ebony_dofus_new_stat_weight)
         
+        
+        #Adding more weight to Dorigami equivalent to 20 (avg vit weight) + lvl * 5 (turns) * 0.75
+        #Applies 100% of level as Shield at the start of each turn for the first
+        #5 turns. During each of these 5 turns, if the caster kills a summons, the
+        #caster gains 100% of their level as Shield for 1 turn (max. 4 times), and
+        #300% (max. 2 times) for a monster or player. Shields are only obtained 
+        #during the caster's turn.
+        dorigami_dofus_new_stat_weight = 20 * level * 5 * 0.75
+        
+        self.problem.add_to_of('p', 
+                               self.structure.get_item_by_name('Dorigami').id, 
+                               dorigami_dofus_new_stat_weight)
+        
+        
+        #Adding more weight to Domakuro equivalent to dmg * 16
+        #Starting on the 5th turn, the caster gains up to 64 damage for the rest of the fight.
+        #This bonus is reduced each time the caster inflicts damage during their turn on an 
+        #opponent for each of the first 4 turns of the fight: No attacks: 16 damage 
+        #1 attack: 8 damage 2+ attacks: 0 damage.
+        domakuro_dofus_new_stat_weight = (objective_values.get('neutdam', 0) + 
+                                          objective_values.get('earthdam', 0) + 
+                                          objective_values.get('firedam', 0) + 
+                                          objective_values.get('airdam', 0) + 
+                                          objective_values.get('waterdam', 0)) * 16
+        
+        self.problem.add_to_of('p', 
+                               self.structure.get_item_by_name('Domakuro').id, 
+                               domakuro_dofus_new_stat_weight)
         
         
         #Adding more weight to Rykke Errel's Bravery equivalent to 400 hp and -10% ranged damage
